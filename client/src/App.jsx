@@ -4,16 +4,21 @@ import {
 	createRoutesFromElements,
 	RouterProvider,
 } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import HomeCards from './components/HomeCards';
+import HomePage from './pages/HomePage';
 import JobListings from './components/JobListings';
-import ViewAllJobs from './components/ViewAllJobs';
+import MainLayout from './layouts/MainLayout';
+import JobsPage from './pages/JobsPage';
 
 const routes = [
-	{ path: '/', element: <div>my app</div> },
-	{ path: 'jobs', element: <JobListings /> },
-	{ path: 'about', element: <div>about</div> },
+	{
+		path: '/',
+		element: <MainLayout />,
+		children: [
+			{ path: '', element: <HomePage /> },
+			{ path: '/jobs', element: <JobsPage /> },
+			{ path: 'about', element: <div>about</div> },
+		],
+	},
 ];
 
 const router = createBrowserRouter(routes);
