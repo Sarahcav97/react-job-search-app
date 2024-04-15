@@ -10,23 +10,14 @@ import HomeCards from './components/HomeCards';
 import JobListings from './components/JobListings';
 import ViewAllJobs from './components/ViewAllJobs';
 
-const router = createBrowserRouter(
-	createRoutesFromElements(
-		<Route
-			index
-			elements={<h1>My</h1>}
-		/>
-	)
-);
+const routes = [
+	{ path: '/', element: <div>my app</div> },
+	{ path: 'jobs', element: <JobListings /> },
+	{ path: 'about', element: <div>about</div> },
+];
+
+const router = createBrowserRouter(routes);
 const App = () => {
-	return (
-		<div id='app-container'>
-			<Navbar />
-			<Hero />
-			<HomeCards />
-			<JobListings />
-			<ViewAllJobs />
-		</div>
-	);
+	return <RouterProvider router={router} />;
 };
 export default App;
