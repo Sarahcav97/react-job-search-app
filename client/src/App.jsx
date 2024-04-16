@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import JobListings from './components/JobListings';
 import MainLayout from './layouts/MainLayout';
 import JobsPage from './pages/JobsPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 const routes = [
 	{
@@ -17,6 +18,7 @@ const routes = [
 			{ path: '', element: <HomePage /> },
 			{ path: '/jobs', element: <JobsPage /> },
 			{ path: 'about', element: <div>about</div> },
+			{ path: '*', element: <NotFoundPage /> },
 		],
 	},
 ];
