@@ -9,18 +9,28 @@ import JobListings from './components/JobListings';
 import MainLayout from './layouts/MainLayout';
 import JobsPage from './pages/JobsPage';
 import NotFoundPage from './pages/NotFoundPage';
-import JobPage from './pages/JobPage';
+import JobPage, { jobLoader } from './pages/JobPage';
+
+// loaders
 
 const routes = [
+	// unauthenticated routes
 	{
 		path: '/',
 		element: <MainLayout />,
 		children: [
 			{ path: '', element: <HomePage /> },
-			{ path: '/jobs', element: <JobsPage /> },
 			{ path: 'about', element: <div>about</div> },
 			{ path: '*', element: <NotFoundPage /> },
-			{ path: '/jobs/:id', element: <JobPage /> },
+		],
+	},
+	// authenticated routes
+	{
+		path: '/jobs',
+		element: <MainLayout />,
+		children: [
+			{ path: '', element: <JobsPage /> },
+			{ path: ':id', element: <JobPage />, loader: jobLoader },
 		],
 	},
 ];
