@@ -15,8 +15,19 @@ import AddJobPage from './pages/AddJobPage';
 // loaders
 
 const App = () => {
-	const addJob = (newJob) => {
-		console.log(newJob);
+	const addJob = async (newJob) => {
+		const res = await fetch('/api/jobs', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(newJob),
+		});
+		return;
+	};
+
+	const deleteJob = async (id) => {
+		console.log('Object', id);
 	};
 	const routes = [
 		// unauthenticated routes
@@ -27,7 +38,7 @@ const App = () => {
 				{ path: '', element: <HomePage /> },
 				{ path: 'about', element: <div>about</div> },
 				{ path: '*', element: <NotFoundPage /> },
-				{ path: '/add-job', element: <AddJobPage />, addJobSubmit: { addJob } },
+				{ path: '/add-job', element: <AddJobPage addJobSubmit={addJob} /> },
 			],
 		},
 		// authenticated routes
@@ -36,7 +47,11 @@ const App = () => {
 			element: <MainLayout />,
 			children: [
 				{ path: '', element: <JobsPage /> },
-				{ path: ':id', element: <JobPage />, loader: jobLoader },
+				{
+					path: ':id',
+					element: <JobPage deleteJob={deleteJob} />,
+					loader: jobLoader,
+				},
 			],
 		},
 	];
