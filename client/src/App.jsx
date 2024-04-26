@@ -14,31 +14,34 @@ import AddJobPage from './pages/AddJobPage';
 
 // loaders
 
-const routes = [
-	// unauthenticated routes
-	{
-		path: '/',
-		element: <MainLayout />,
-		children: [
-			{ path: '', element: <HomePage /> },
-			{ path: 'about', element: <div>about</div> },
-			{ path: '*', element: <NotFoundPage /> },
-			{ path: '/add-job', element: <AddJobPage /> },
-		],
-	},
-	// authenticated routes
-	{
-		path: '/jobs',
-		element: <MainLayout />,
-		children: [
-			{ path: '', element: <JobsPage /> },
-			{ path: ':id', element: <JobPage />, loader: jobLoader },
-		],
-	},
-];
-
-const router = createBrowserRouter(routes);
 const App = () => {
+	const addJob = (newJob) => {
+		console.log(newJob);
+	};
+	const routes = [
+		// unauthenticated routes
+		{
+			path: '/',
+			element: <MainLayout />,
+			children: [
+				{ path: '', element: <HomePage /> },
+				{ path: 'about', element: <div>about</div> },
+				{ path: '*', element: <NotFoundPage /> },
+				{ path: '/add-job', element: <AddJobPage />, addJobSubmit: { addJob } },
+			],
+		},
+		// authenticated routes
+		{
+			path: '/jobs',
+			element: <MainLayout />,
+			children: [
+				{ path: '', element: <JobsPage /> },
+				{ path: ':id', element: <JobPage />, loader: jobLoader },
+			],
+		},
+	];
+
+	const router = createBrowserRouter(routes);
 	return <RouterProvider router={router} />;
 };
 export default App;
