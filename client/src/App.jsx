@@ -11,6 +11,7 @@ import JobsPage from './pages/JobsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import JobPage, { jobLoader } from './pages/JobPage';
 import AddJobPage from './pages/AddJobPage';
+import EditJobPage from './pages/EditJobPage';
 
 // loaders
 
@@ -27,7 +28,20 @@ const App = () => {
 	};
 
 	const deleteJob = async (id) => {
-		console.log('Object', id);
+		const res = await fetch(`/api/jobs/${id}`, {
+			method: 'DELETE',
+		});
+		return;
+	};
+
+	const updatedJob = async (job) => {
+		const res = await fetch(`/api/jobs/${job.id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(job),
+		});
 	};
 	const routes = [
 		// unauthenticated routes
@@ -47,6 +61,11 @@ const App = () => {
 			element: <MainLayout />,
 			children: [
 				{ path: '', element: <JobsPage /> },
+				{
+					path: 'edit-job/:id',
+					element: <EditJobPage updatedJobSubmit={updatedJob} />,
+					loader: jobLoader,
+				},
 				{
 					path: ':id',
 					element: <JobPage deleteJob={deleteJob} />,

@@ -1,21 +1,26 @@
+import { useParams, useLoaderData, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAlert } from '../context/AlertContext';
-const AddJobPage = ({ addJobSubmit }) => {
-	const [title, setTitle] = useState('');
-	const [type, setType] = useState('Full-Time');
-	const [location, setLocation] = useState('');
-	const [description, setDescription] = useState('');
-	const [salary, setSalary] = useState('Under $50k');
-	const [companyName, setCompanyName] = useState('');
-	const [companyDescription, setCompanyDescription] = useState('');
-	const [contactEmail, setCompanyEmail] = useState('');
-	const [contactPhone, setCompanyPhone] = useState('');
+
+const EditJobPage = ({ updatedJobSubmit }) => {
+	const job = useLoaderData();
+	const [title, setTitle] = useState(job.title);
+	const [type, setType] = useState(job.type);
+	const [location, setLocation] = useState(job.location);
+	const [description, setDescription] = useState(job.description);
+	const [salary, setSalary] = useState(job.salary);
+	const [companyName, setCompanyName] = useState(job.company.name);
+	const [companyDescription, setCompanyDescription] = useState(
+		job.company.description
+	);
+	const [contactEmail, setCompanyEmail] = useState(job.company.contactEmail);
+	const [contactPhone, setCompanyPhone] = useState(job.company.contactPhone);
 	const { setAlert } = useAlert();
 	const navigate = useNavigate();
 	const submitForm = (e) => {
 		e.preventDefault();
-		const newJob = {
+		const updatedJob = {
+			id,
 			title,
 			type,
 			location,
@@ -28,11 +33,11 @@ const AddJobPage = ({ addJobSubmit }) => {
 				companyPhone,
 			},
 		};
-		addJobSubmit(newJob);
+		updatedJobSubmit(updatedJob);
 
 		setAlert('success', 'Job added successfully');
 		console.log('before navigate');
-		navigate('/jobs');
+		navigate(`/jobs/${id}`);
 		return;
 	};
 	return (
@@ -222,7 +227,7 @@ const AddJobPage = ({ addJobSubmit }) => {
 								className='bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline'
 								type='submit'
 							>
-								Add Job
+								Update Job
 							</button>
 						</div>
 					</form>
@@ -231,4 +236,4 @@ const AddJobPage = ({ addJobSubmit }) => {
 		</section>
 	);
 };
-export default AddJobPage;
+export default EditJobPage;
