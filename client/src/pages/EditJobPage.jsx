@@ -4,6 +4,7 @@ import { useAlert } from '../context/AlertContext';
 
 const EditJobPage = ({ updatedJobSubmit }) => {
 	const job = useLoaderData();
+	const { id } = useParams();
 	const [title, setTitle] = useState(job.title);
 	const [type, setType] = useState(job.type);
 	const [location, setLocation] = useState(job.location);
@@ -29,8 +30,8 @@ const EditJobPage = ({ updatedJobSubmit }) => {
 			company: {
 				name: companyName,
 				description: companyDescription,
-				companyEmail,
-				companyPhone,
+				contactEmail,
+				contactPhone,
 			},
 		};
 		updatedJobSubmit(updatedJob);

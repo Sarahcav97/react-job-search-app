@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const JobPage = ({ deleteJob }) => {
 	const navigate = useNavigate;
 	const { setAlert } = useAlert();
-	const { id } = useParams();
+
 	const job = useLoaderData();
 	const onDeleteClick = (jobId) => {
 		const confirm = window.confirm(
@@ -125,9 +125,7 @@ const JobPage = ({ deleteJob }) => {
 
 const jobLoader = async ({ params }) => {
 	try {
-		console.log({ params });
-
-		const res = await fetch(`/api/jobs/${params.id}`);
+		const res = await fetch(`http://localhost:8000/api/jobs/${params.id}`);
 		const data = await res.json();
 
 		if (data) return data;
