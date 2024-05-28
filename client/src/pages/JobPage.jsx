@@ -125,7 +125,7 @@ const JobPage = ({ deleteJob }) => {
 
 const jobLoader = async ({ params }) => {
 	try {
-		const res = await fetch(`http://localhost:8000/api/jobs/${params.id}`);
+		const res = await fetch(`http://localhost:6001/api/jobs/${params.id}`);
 		const data = await res.json();
 
 		if (data) return data;

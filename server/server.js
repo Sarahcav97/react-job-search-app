@@ -94,6 +94,6 @@ app.delete('/api/jobs/:id', async (req, res) => {
 	}
 });
 
-app.listen(8000, () => {
-	console.log('app is running at http://localhost:8000');
+app.listen(6001, () => {
+	console.log('app is running at http://localhost:6001');
 });
