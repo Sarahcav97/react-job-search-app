@@ -13,7 +13,14 @@ app.use(cors());
 app.use(express.json());
 require('dotenv').config();
 // routes
-
+app.use((req, res, next) => {
+	console.log({
+		body: req.body,
+		query: req.query,
+		path: req.path,
+	});
+	next();
+});
 // CREATE
 app.post('/api/jobs', async (req, res) => {
 	try {
@@ -94,13 +101,13 @@ app.delete('/api/jobs/:id', async (req, res) => {
 	}
 });
 
-// if (process.env.NODE_ENV === 'production') {
-app.use(express.static(path.join(__dirname, '..', 'client/dist')));
-app.get('*', (req, res) => {
-	console.log('sending react app');
-	res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
-});
-// }
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static(path.join(__dirname, '..', 'client/dist')));
+	app.get('*', (req, res) => {
+		console.log('sending react app');
+		res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
+	});
+}
 app.listen(6001, () => {
 	console.log('app is running at http://localhost:6001');
 });
