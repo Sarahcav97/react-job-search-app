@@ -12,11 +12,8 @@ import NotFoundPage from './pages/NotFoundPage';
 import JobPage, { jobLoader } from './pages/JobPage';
 import AddJobPage from './pages/AddJobPage';
 import EditJobPage from './pages/EditJobPage';
-
+import { isProd, prodUrl } from './isProd';
 // loaders
-const isProd = window.location.href.includes('sarahcavs.com');
-const prodUrl = 'https://jobsearch.sarahcavs.com/api';
-console.log({ isProd });
 
 const App = () => {
 	const addJob = async (newJob) => {
