@@ -5,7 +5,7 @@ import { useAlert } from '../context/AlertContext';
 import { useParams, useLoaderData, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaMapMarker } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-
+import { isProd, prodUrl } from '../isProd';
 const JobPage = ({ deleteJob }) => {
 	const navigate = useNavigate;
 	const { setAlert } = useAlert();
@@ -125,7 +125,11 @@ const JobPage = ({ deleteJob }) => {
 
 const jobLoader = async ({ params }) => {
 	try {
-		const res = await fetch(`http://localhost:6001/api/jobs/${params.id}`);
+		const res = await fetch(
+			isProd
+				? prodUrl + '/jobs/' + params.id
+				: `http://localhost:6001/api/jobs/${params.id}`
+		);
 		const data = await res.json();
 
 		if (data) return data;
