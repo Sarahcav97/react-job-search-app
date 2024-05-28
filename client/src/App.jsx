@@ -14,34 +14,46 @@ import AddJobPage from './pages/AddJobPage';
 import EditJobPage from './pages/EditJobPage';
 
 // loaders
-
+const isProd = window.location.href.includes('sarahcavs.com');
+const prodUrl = 'https://jobsearch.sarahcavs.com/api';
 const App = () => {
 	const addJob = async (newJob) => {
-		const res = await fetch('http://localhost:6001/api/jobs', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(newJob),
-		});
+		const res = await fetch(
+			isProd ? `${prodUrl}/jobs` : 'http://localhost:6001/api/jobs',
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(newJob),
+			}
+		);
 		return;
 	};
 
 	const deleteJob = async (id) => {
-		const res = await fetch(`http://localhost:6001/api/jobs/${id}`, {
-			method: 'DELETE',
-		});
+		const res = await fetch(
+			isProd ? `${prodUrl}/jobs/${id}` : `http://localhost:6001/api/jobs/${id}`,
+			{
+				method: 'DELETE',
+			}
+		);
 		return;
 	};
 
 	const updatedJob = async (job) => {
-		const res = await fetch(`http://localhost:6001/api/jobs/${job.id}`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(job),
-		});
+		const res = await fetch(
+			isProd
+				? `${prodUrl}/jobs/${job.id}`
+				: `http://localhost:6001/api/jobs/${job.id}`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(job),
+			}
+		);
 		return res;
 	};
 	const routes = [
