@@ -11,10 +11,10 @@ const JobListings = ({ isHome = false }) => {
 		const fetchJobs = async () => {
 			const apiUrl = isHome
 				? isProd
-					? prodUrl + 'jobs?_limit=3'
+					? prodUrl + '/jobs?_limit=3'
 					: 'http://localhost:6001/api/jobs?_limit=3'
 				: isProd
-				? prodUrl + 'jobs'
+				? prodUrl + '/jobs'
 				: 'http://localhost:6001/api/jobs';
 			try {
 				const res = await fetch(apiUrl);
