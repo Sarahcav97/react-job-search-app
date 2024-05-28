@@ -14,7 +14,8 @@
 		"start:server": "npm start --prefix server",
 		"dev": "npm run start:server & npm run start:react",
 		"install": "cd server && npm install && cd ../client && npm install",
-		"build": "cd client && npm run build"
+		"build": "cd client && npm run build",
+		"start": "cd server && npm start"
 	},
 	"keywords": [],
 	"author": "",

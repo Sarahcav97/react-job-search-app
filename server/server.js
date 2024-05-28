@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-
+const path = require('path');
 const {
 	getJobs,
 	rewriteJobs,
@@ -94,6 +94,12 @@ app.delete('/api/jobs/:id', async (req, res) => {
 	}
 });
 
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static(path.join(__dirname, '..', 'client/build')));
+	app.get('*', (req, res) => {
+		res.sendFile(path.join(__dirname, '..', 'client/build/index.html'));
+	});
+}
 app.listen(6001, () => {
 	console.log('app is running at http://localhost:6001');
 });
