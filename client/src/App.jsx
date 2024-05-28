@@ -16,6 +16,8 @@ import EditJobPage from './pages/EditJobPage';
 // loaders
 const isProd = window.location.href.includes('sarahcavs.com');
 const prodUrl = 'https://jobsearch.sarahcavs.com/api';
+console.log({ isProd });
+
 const App = () => {
 	const addJob = async (newJob) => {
 		const res = await fetch(
