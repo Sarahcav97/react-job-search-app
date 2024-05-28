@@ -97,6 +97,7 @@ app.delete('/api/jobs/:id', async (req, res) => {
 // if (process.env.NODE_ENV === 'production') {
 app.use(express.static(path.join(__dirname, '..', 'client/dist')));
 app.get('*', (req, res) => {
+	console.log('sending react app');
 	res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 // }
