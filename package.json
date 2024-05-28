@@ -1,6 +1,22 @@
 {
-  "dependencies": {
-    "react-spinners": "^0.13.8",
-    "react-toastify": "^10.0.5"
-  }
+	"dependencies": {
+		"react-spinners": "^0.13.8",
+		"react-toastify": "^10.0.5"
+	},
+	"name": "react-job-search-app",
+	"description": "",
+	"version": "1.0.0",
+	"main": "index.js",
+	"devDependencies": {},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start:react": "npm start --prefix client",
+		"start:server": "npm start --prefix server",
+		"dev": "npm run start:server & npm run start:react",
+		"install": "cd server && npm install && cd ../client && npm install",
+		"build": "cd client && npm run build"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
 }
